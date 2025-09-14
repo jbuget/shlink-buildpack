@@ -32,7 +32,7 @@ echo "done"
 
 echo -n "-----> Extracting ZIP... "
 unzip -q "$SHLINK_ZIP" -d "$SHLINK_DOWNLOADS"
-mv "$SHLINK_DOWNLOADS/shlink${SHLINK_VERSION}_php8.4_dist"/* "$1"
+cp -r "$SHLINK_DOWNLOADS/shlink${SHLINK_VERSION}_php8.4_dist"/* "$1"
 echo "done"
 
 echo -n "-----> Deleting downloads directory... "

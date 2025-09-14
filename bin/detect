@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "Shlink detected"
+exit 0

@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+# Debug, echo every command
+if [[ -n "$BUILDPACK_DEBUG" ]]; then
+  set -x
+fi
+
+# Fail immediately on non-zero exit code.
+set -e
+# Fail immediately on non-zero exit code within a pipeline.
+set -o pipefail
+# Fail on undeclared variables.
+set -u
+
+BUILD_DIR=${1:-}
+CACHE_DIR=${2:-}
+ENV_DIR=${3:-}
+
+
+
+DEFAULT_SHLINK_VERSION="$(cat ./bin/version)"
+SHLINK_VERSION="${SHLINK_VERSION:-$DEFAULT_SHLINK_VERSION}"
+SHLINK_DOWNLOADS="$1/downloads"
+SHLINK_ZIP="$SHLINK_DOWNLOADS/shlink.zip"
+SHLINK_URL="https://github.com/shlinkio/shlink/releases/download/v${SHLINK_VERSION}/shlink${SHLINK_VERSION}_php8.4_dist.zip"
+
+mkdir -p "$SHLINK_DOWNLOADS"
+
+echo -n "-----> Downloading Shlink... from $SHLINK_URL to $SHLINK_ZIP... "
+curl -s --retry 3 -o "$SHLINK_ZIP" -L "$SHLINK_URL"
+echo "done"
+
+echo -n "-----> Extracting ZIP... "
+unzip -q "$SHLINK_ZIP" -d "$SHLINK_DOWNLOADS"
+mv "$SHLINK_DOWNLOADS/shlink"/* "$1"
+echo "done"
+
+echo -n "-----> Deleting downloads directory... "
+rm -rf "$SHLINK_DOWNLOADS"
+echo "done"
+
+echo "-----> Shlink version $SHLINK_VERSION installed"

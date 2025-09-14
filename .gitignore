@@ -1,0 +1,12 @@
+.vscode/
+.history/
+.DS_Store
+node_modules/
+dist/
+.env
+*.log
+coverage/
+.idea/
+*.iml
+*.swp
+*.swo

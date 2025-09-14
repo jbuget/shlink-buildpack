@@ -27,12 +27,12 @@ SHLINK_URL="https://github.com/shlinkio/shlink/releases/download/v${SHLINK_VERSI
 mkdir -p "$SHLINK_DOWNLOADS"
 
 echo -n "-----> Downloading Shlink... from $SHLINK_URL to $SHLINK_ZIP... "
-curl -s --retry 3 -o "$SHLINK_ZIP" -L "$SHLINK_URL"
+curl -s --retry 3 -L "$SHLINK_URL" -o "$SHLINK_ZIP"
 echo "done"
 
 echo -n "-----> Extracting ZIP... "
 unzip -q "$SHLINK_ZIP" -d "$SHLINK_DOWNLOADS"
-mv "$SHLINK_DOWNLOADS/shlink"/* "$1"
+mv "$SHLINK_DOWNLOADS/shlink${SHLINK_VERSION}_php8.4_dist"/* "$1"
 echo "done"
 
 echo -n "-----> Deleting downloads directory... "

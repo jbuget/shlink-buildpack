@@ -39,4 +39,9 @@ echo -n "-----> Deleting downloads directory... "
 rm -rf "$SHLINK_DOWNLOADS"
 echo "done"
 
+echo -n "-----> Installing RR... "
+php $1/vendor/bin/rr get --no-interaction --location $1/bin/ && chmod +x $1/bin/rr
+ls -la $1/bin
+echo "done"
+
 echo "-----> Shlink version $SHLINK_VERSION installed"

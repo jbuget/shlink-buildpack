@@ -1,7 +1,0 @@
-{
-    "packages": [],
-    "packages-dev": [],
-    "platform": {
-        "php": "^8.4"
-    }
-}

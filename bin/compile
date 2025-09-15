@@ -38,5 +38,3 @@ echo "done"
 echo -n "-----> Deleting downloads directory... "
 rm -rf "$SHLINK_DOWNLOADS"
 echo "done"
-
-echo "-----> Shlink version $SHLINK_VERSION installed"

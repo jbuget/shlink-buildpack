@@ -40,8 +40,7 @@ fi
 echo -n "-----> Extracting ZIP... "
 unzip -q "$SHLINK_ZIP" -d "$SHLINK_DOWNLOADS"
 cp -r "$SHLINK_DOWNLOADS/shlink${SHLINK_VERSION}_php8.4_dist"/* "$1"
-chmod +x "$1/vendor/bin/shlink-installer"
-chmod +x "$1/vendor/bin/rr"
+chmod +x "$1/vendor/bin/"*
 echo "done"
 
 echo -n "-----> Deleting downloads directory... "

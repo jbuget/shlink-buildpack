@@ -16,8 +16,6 @@ BUILD_DIR=${1:-}
 CACHE_DIR=${2:-}
 ENV_DIR=${3:-}
 
-
-
 DEFAULT_SHLINK_VERSION="$(cat ./bin/version)"
 SHLINK_VERSION="${SHLINK_VERSION:-$DEFAULT_SHLINK_VERSION}"
 SHLINK_DOWNLOADS="$1/downloads"
@@ -26,9 +24,18 @@ SHLINK_URL="https://github.com/shlinkio/shlink/releases/download/v${SHLINK_VERSI
 
 mkdir -p "$SHLINK_DOWNLOADS"
 
-echo -n "-----> Downloading Shlink... from $SHLINK_URL to $SHLINK_ZIP... "
-curl -s --retry 3 -L "$SHLINK_URL" -o "$SHLINK_ZIP"
-echo "done"
+CACHED_ZIP="$CACHE_DIR/shlink_${SHLINK_VERSION}.zip"
+
+if [[ -f "$CACHED_ZIP" ]]; then
+  echo -n "-----> Using cached Shlink ZIP from $CACHED_ZIP... "
+  cp "$CACHED_ZIP" "$SHLINK_ZIP"
+  echo "done"
+else
+  echo -n "-----> Downloading Shlink... from $SHLINK_URL to $SHLINK_ZIP... "
+  curl -s --retry 3 -L "$SHLINK_URL" -o "$SHLINK_ZIP"
+  cp "$SHLINK_ZIP" "$CACHED_ZIP"
+  echo "done"
+fi
 
 echo -n "-----> Extracting ZIP... "
 unzip -q "$SHLINK_ZIP" -d "$SHLINK_DOWNLOADS"
